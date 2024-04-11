@@ -1,5 +1,4 @@
 version: 0.2
- 
 phases:
   install:
     runtime-versions:
@@ -7,28 +6,28 @@ phases:
     commands:
       - echo "Installing Docker"
       - apt-get update && apt-get install -y docker.io
-
+ 
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 183250730566.dkr.ecr.us-east-1.amazonaws.com
-      - export REPOSITORY_URI=183250730566.dkr.ecr.us-east-1.amazonaws.com/test
-
+      - export REPOSITORY_URI=183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final
+ 
   build:
     commands:
       - echo Build started on $(date)
       - echo Building the Docker image...
-      - docker build -t 183250730566.dkr.ecr.us-east-1.amazonaws.com/test:latest .
-      - docker tag 183250730566.dkr.ecr.us-east-1.amazonaws.com/test 183250730566.dkr.ecr.us-east-1.amazonaws.com/test:latest
-
+      - docker build -t 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest .
+      - docker tag 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest
+ 
   post_build:
     commands:
       - echo Build completed on $(date)
       - echo Pushing the Docker images...
-      - docker push 183250730566.dkr.ecr.us-east-1.amazonaws.com/test:latest
+      - docker push 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' test 183250730566.dkr.ecr.us-east-1.amazonaws.com/test:latest > imagedefinitions.json
-
+      - printf '[{"name":"%s","imageUri":"%s"}]' test 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest > imagedefinitions.json
+ 
 artifacts:
   files:
     - imagedefinitions.json

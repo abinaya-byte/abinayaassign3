@@ -26,7 +26,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' test 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' elangovan_final:latest 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest > imagedefinitions.json
  
 artifacts:
   files:

@@ -18,7 +18,7 @@ phases:
       - echo Build started on $(date)
       - echo Building the Docker image...
       - docker build -t 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest .
-      - docker tag 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest
+      - docker tag 183250730566.dkr.ecr.us-east-1.amazonaws.com/elangovan_final:latest
  
   post_build:
     commands:

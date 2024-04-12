@@ -28,7 +28,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' flaskapp 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest
+      - printf '[{"name":"%s","imageUri":"%s"}]' flaskapp 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest > imagedefinitions.json
  
 artifacts:
   files: imagedefinitions.json

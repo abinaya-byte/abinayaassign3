@@ -1,12 +1,27 @@
-# Use the official Python image as the base image
-FROM python:3.8-slim
-# Set the working directory in the container
+# Use official Ubuntu image as the base image
+FROM public.ecr.aws/lts/ubuntu:latest
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Set working directory in the container
 WORKDIR /app
-# Copy the Python script into the container at /app
-COPY app.py .
-# Install Flask
-RUN pip install Flask
-# Expose port 80 to the outside world.
-EXPOSE 5000
-# Run the Python script when the container launches
-CMD ["python", "app.py"]
+
+# Install Python and other dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    apt-get clean
+
+# Copy the requirements file and install dependencies
+COPY requirements.txt /app/
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Copy the application code into the container
+COPY . /app/
+
+# Expose the Flask app port
+EXPOSE 80
+
+# Command to run the application
+CMD ["python3", "app.py"]

@@ -1,10 +1,18 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/azureabinaya/abinayassign3/dockerimage:$COMMIT_SHA', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/azureabinaya/abinayamidterm/dockerimage:$COMMIT_SHA', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/azureabinaya/abinayassign3/dockerimage:$COMMIT_SHA']
+  args: ['push', 'us-central1-docker.pkg.dev/azureabinaya/abinayamidterm/dockerimage:$COMMIT_SHA']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'my-cloud-run-service', '--image', 'us-central1-docker.pkg.dev/azureabinaya/abinayassign3/dockerimage:$COMMIT_SHA', '--platform', 'managed', '--region', 'us-central1']
+  args:
+  - 'run'
+  - 'deploy'
+  - 'Abinaya-cloud-run-service' # Replace with your desired service name
+  - '--image'
+  - 'us-central1-docker.pkg.dev/azureabinaya/abinayamidterm/dockerimage:$COMMIT_SHA'
+  - '--platform'
+  - 'managed'
+  - '--region'
+  - 'us-central1'
 options:
   defaultLogsBucketBehavior: 'REGIONAL_USER_OWNED_BUCKET'
-

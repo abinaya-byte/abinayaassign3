@@ -13,22 +13,22 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 211125601405.dkr.ecr.us-east-1.amazonaws.com
-      - export REPOSITORY_URI=211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya  # Exporting REPOSITORY_URI to use it in subsequent phases
+      - export REPOSITORY_URI=211125601405.dkr.ecr.us-east-1.amazonaws.com/devopsfinal  # Exporting REPOSITORY_URI to use it in subsequent phases
   
   build:
     commands:
       - echo Build started on $(date)
       - echo Building the Docker image...
-      - docker build -t 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest .
-      - docker tag 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest
+      - docker build -t 211125601405.dkr.ecr.us-east-1.amazonaws.com/devopsfinal:latest .
+      - docker tag 211125601405.dkr.ecr.us-east-1.amazonaws.com/devopsfinal:latest 211125601405.dkr.ecr.us-east-1.amazonaws.com/devopsfinal:latest
   
   post_build:
     commands:
       - echo Build completed on $(date)
       - echo Pushing the Docker images...
-      - docker push 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest
+      - docker push 211125601405.dkr.ecr.us-east-1.amazonaws.com/devopsfinal:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' flaskapp 211125601405.dkr.ecr.us-east-1.amazonaws.com/abinaya:latest > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' flaskapp 211125601405.dkr.ecr.us-east-1.amazonaws.com/devopsfinal:latest > imagedefinitions.json
  
 artifacts:
   files: imagedefinitions.json
